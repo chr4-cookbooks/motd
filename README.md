@@ -2,24 +2,35 @@
 
 Installs message of the day (respects update-motd, if installed)
 
-# Definitions
+# Recipes
 
-To use the definition in your cookbook, make sure you put the following line in your metadata.rb
+The default recipe installs a motd using the predefined cow template
+
+# Providers
+
+To use the provider in your cookbook, make sure you put the following line in your metadata.rb
 
     depends "motd"
 
-create motd using the shipped cow template
+## motd_manage
 
-    motd '50-mymotd'
+The name attribute is only used if update-motd is installed on the system.
+If not, it has no meaning.
 
-create a motd using a custom template
+Create motd using the shipped cow template
 
-    motd '50-mymotd' do
+    motd_manage '50-mymotd'
+
+Create a motd using a custom template
+
+    motd_manage '50-mymotd' do
       cookbook 'my cookbook'
       source   'test.erb'
       colorize false
     end
 
-# Recipes
+Remove a motd (if update-motd is used only)
 
-The default recipe installs a motd using the predefined cow template
+    motd_manage '50-mymotd' do
+      action :delete
+    end

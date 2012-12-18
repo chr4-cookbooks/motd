@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: motd
-# Definition:: motd
+# Resource:: manage
 #
 # Copyright 2012, Chris Aumann
 #
@@ -18,27 +18,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-define :motd, :cookbook => 'motd', :source => 'cow.erb', :colorize => true do
-  # install colorize gem, so we can use colors in an easy way in our templates
-  gem_package 'colorize' if params[:colorize]
+actions        :create, :delete
+default_action :create
 
-  # is this machine using update-motd?
-  update_motd = File.directory? '/etc/update-motd.d'
-
-  if update_motd
-    target = "/etc/update-motd.d/#{params[:name]}"
-    permissions = '0755'
-  else
-    target = '/etc/motd'
-    permissions = '0644'
-  end
-
-  template target do
-    owner     'root'
-    group     'root'
-    mode      permissions
-    cookbook  params[:cookbook]
-    source    params[:source]
-    variables :update_motd => update_motd
-  end
-end
+attribute :name,      :kind_of => String, :name_attribute => true
+attribute :cookbook,  :kind_of => String, :default => 'motd'
+attribute :source,    :kind_of => String, :default => 'cow.erb'
+attribute :colorize,  :kind_of => [ TrueClass, FalseClass ], :default => true
+attribute :variables, :kind_of => Hash, :default => {}
