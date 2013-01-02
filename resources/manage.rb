@@ -24,5 +24,4 @@ default_action :create
 attribute :name,      :kind_of => String, :name_attribute => true
 attribute :cookbook,  :kind_of => String, :default => 'motd'
 attribute :source,    :kind_of => String, :default => 'cow.erb'
-attribute :colorize,  :kind_of => [ TrueClass, FalseClass ], :default => true
 attribute :variables, :kind_of => Hash, :default => {}

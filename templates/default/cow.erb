@@ -3,15 +3,14 @@
 
 cat <<EOS
 <% end -%>
-<% require 'colorize' %>
 
-this is <%= @hostname.blue %>, a <%= @domain %> <%= @environment %> server
+this is [0;34;49m<%= @hostname %>[0m, a <%= @domain %> <%= @environment %> server
 
 <% if @environment == 'production' %>
 just in case you didn't notice the line above, maybe this cow helps:
 
  ___________________________________
-< <%= 'YOU ARE ON A PRODUCTION SERVER!'.red %> >
+< [0;31;49mYOU ARE ON A PRODUCTION SERVER![0m >
  -----------------------------------
         \   ^__^
          \  (oo)\_______

@@ -26,7 +26,6 @@ Create a motd using a custom template
     motd_manage '50-mymotd' do
       cookbook 'my cookbook'
       source   'test.erb'
-      colorize false
     end
 
 Remove a motd (if update-motd is used only)

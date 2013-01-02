@@ -19,9 +19,6 @@
 #
 
 action :create do
-  # install colorize gem, so we can use colors in an easy way in our templates
-  gem_package 'colorize' if new_resource.colorize
-
   # is this machine using update-motd?
   update_motd = ::File.directory? '/etc/update-motd.d'
 
