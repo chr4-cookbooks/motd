@@ -30,7 +30,7 @@ action :create do
     permissions = '0644'
   end
 
-  template 'motd' do
+  r = template 'motd' do
     owner     'root'
     group     'root'
     path      target
@@ -46,11 +46,19 @@ action :create do
     else
       variables new_resource.variables
     end
+
+    action :nothing
   end
+
+  r.run_action(:create)
+  new_resource.updated_by_last_action(true) if r.updated_by_last_action?
 end
 
 action :delete do
-  file "/etc/update-motd.d/#{new_resource.name}" do
-    action :delete
+  r = file "/etc/update-motd.d/#{new_resource.name}" do
+    action :nothing
   end
+
+  r.run_action(:delete)
+  new_resource.updated_by_last_action(true) if r.updated_by_last_action?
 end

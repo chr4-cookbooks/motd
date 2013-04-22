@@ -18,4 +18,4 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-motd_manage '50-chef'
+motd '50-chef'
