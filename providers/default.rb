@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: motd
-# Provider:: manage
+# Provider:: default
 #
 # Copyright 2012, Chris Aumann
 #
@@ -30,10 +30,9 @@ action :create do
     permissions = '0644'
   end
 
-  r = template 'motd' do
+  r = template target do
     owner     'root'
     group     'root'
-    path      target
     mode      permissions
     cookbook  new_resource.cookbook
     source    new_resource.source
@@ -42,7 +41,8 @@ action :create do
       variables :update_motd => update_motd,
                 :environment => node.chef_environment,
                 :domain => node['domain'],
-                :hostname => node['hostname']
+                :hostname => node['hostname'],
+                :color => new_resource.color
     else
       variables new_resource.variables
     end

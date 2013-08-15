@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: motd
-# Recipe:: default
+# Attributes:: default
 #
 # Copyright 2012, Chris Aumann
 #
@@ -18,5 +18,4 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-include_recipe 'motd::cow'
-include_recipe 'motd::knife-status'
+default['motd']['color'] = true

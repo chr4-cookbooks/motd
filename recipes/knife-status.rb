@@ -18,5 +18,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-include_recipe 'motd::cow'
-include_recipe 'motd::knife-status'
+# as this needs to run the knife command at login, only supported when update-motd is used
+motd '98-knife-status' do
+  source 'knife-status.erb'
+  only_if { ::File.directory? '/etc/update-motd.d' }
+end

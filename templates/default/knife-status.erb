@@ -1,0 +1,21 @@
+<% if @update_motd %>
+#!/bin/sh
+
+<% if node.attribute?('chef_client') %>
+<% chef_config = "#{node['chef_client']['conf_dir']}/client.rb" %>
+<% else %>
+<% chef_config = '/etc/chef/client.rb' %>
+<% end -%>
+
+LAST_RUN=$(knife status -c <%= chef_config %> 'name:<%= node['hostname'] %>' |cut -d',' -f1)
+
+<% if @color %>
+if [ "${LAST_RUN#*minute}" != "$LAST_RUN" ]; then
+  echo "Last chef run: [0;32;49m$LAST_RUN[0m"
+else
+  echo "Last chef run: [0;31;49m$LAST_RUN[0m"
+fi
+<% else %>
+echo Last chef run: $LAST_RUN
+<% end -%>
+<% end -%>

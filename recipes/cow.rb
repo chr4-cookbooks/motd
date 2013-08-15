@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: motd
-# Recipe:: default
+# Recipe:: cow
 #
 # Copyright 2012, Chris Aumann
 #
@@ -18,5 +18,4 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-include_recipe 'motd::cow'
-include_recipe 'motd::knife-status'
+motd '50-cow'
