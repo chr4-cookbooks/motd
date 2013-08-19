@@ -7,7 +7,7 @@
 <% chef_config = '/etc/chef/client.rb' %>
 <% end -%>
 
-LAST_RUN=$(knife status -c <%= chef_config %> 'name:<%= node['hostname'] %>' |cut -d',' -f1)
+LAST_RUN=$(knife status -c <%= chef_config %> 'name:<%= node.name %>' |cut -d',' -f1)
 
 <% if @color %>
 if [ "${LAST_RUN#*minute}" != "$LAST_RUN" ]; then
