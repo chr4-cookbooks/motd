@@ -7,7 +7,12 @@
 <% chef_config = '/etc/chef/client.rb' %>
 <% end -%>
 
-LAST_RUN=$(knife status -c <%= chef_config %> 'name:<%= node.name %>' |cut -d',' -f1)
+LAST_RUN=$(timeout -s KILL 1 knife status -c <%= chef_config %> 'name:<%= node.name %>' |cut -d',' -f1)
+
+# In case we do not receive anything (e.g. timeout), set to unknown
+if [ -z $LAST_RUN ]; then
+  LAST_RUN="unknown"
+fi
 
 <% if @color %>
 if [ "${LAST_RUN#*minute}" != "$LAST_RUN" ]; then
