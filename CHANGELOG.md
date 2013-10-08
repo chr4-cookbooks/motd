@@ -1,17 +1,14 @@
-# CHANGELOG for motd
+motd CHANGELOG
+=====================
 
-This file is used to list changes made in each version of motd.
+This file is used to list changes made in each version of the motd cookbook.
 
-## 0.2.0:
+0.4.0
+-----
 
-* Migrate motd_manage LWRP to motd
-* Notify when updated [FC017]
+- Use a chef_handler instead of "knife status" to get the last successful chef run
+  This is faster than invoking ruby on each login
 
-## 0.1.0:
-
-* Initial release of motd
-
-- - -
-Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
-
-The [Github Flavored Markdown page](http://github.github.com/github-flavored-markdown/) describes the differences between markdown on github and standard markdown.
+0.1.0
+-----
+- [Chris Aumann] - Initial release of motd
