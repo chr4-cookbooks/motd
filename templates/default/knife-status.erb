@@ -1,26 +1,19 @@
 <% if @update_motd %>
 #!/bin/sh
 
-<% if node.attribute?('chef_client') %>
-<% chef_config = "#{node['chef_client']['conf_dir']}/client.rb" %>
-<% else %>
-<% chef_config = '/etc/chef/client.rb' %>
-<% end -%>
-
-LAST_RUN=$(timeout -s KILL 1 knife status -c <%= chef_config %> 'name:<%= node.name %>' |cut -d',' -f1)
-
-# In case we do not receive anything (e.g. timeout), set to unknown
-if [ -z $LAST_RUN ]; then
+if [ -f <%= @timestamp_file %> ]; then
+  LAST_RUN=$(expr $(expr $(date +%s) - $(cat <%= @timestamp_file %>)) / 60)
+else
   LAST_RUN="unknown"
 fi
 
 <% if @color %>
-if [ "${LAST_RUN#*minute}" != "$LAST_RUN" ]; then
-  echo "Last chef run: [0;32;49m$LAST_RUN[0m"
+if [ $LAST_RUN -le <%= @interval %> ]; then
+  echo "Last chef run: [0;32;49m$LAST_RUN minute(s)[0m ago"
 else
-  echo "Last chef run: [0;31;49m$LAST_RUN[0m"
+  echo "Last chef run: [0;31;49m$LAST_RUN minute(s)[0m ago"
 fi
 <% else %>
-echo Last chef run: $LAST_RUN
+echo Last chef run: $LAST_RUN minute(s) ago
 <% end -%>
 <% end -%>
