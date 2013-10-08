@@ -22,6 +22,15 @@ action :create do
   # is this machine using update-motd?
   update_motd = ::File.directory? '/etc/update-motd.d'
 
+  # default variables
+  default_variables = {
+    update_motd: update_motd,
+    environment: node.chef_environment,
+    domain:      node['domain'],
+    hostname:    node['hostname'],
+    color:       new_resource.color,
+  }
+
   if update_motd
     target = "/etc/update-motd.d/#{new_resource.name}"
     permissions = '0755'
@@ -36,18 +45,8 @@ action :create do
     mode      permissions
     cookbook  new_resource.cookbook
     source    new_resource.source
-
-    if new_resource.variables.empty?
-      variables :update_motd => update_motd,
-                :environment => node.chef_environment,
-                :domain => node['domain'],
-                :hostname => node['hostname'],
-                :color => new_resource.color
-    else
-      variables new_resource.variables
-    end
-
-    action :nothing
+    variables default_variables.merge(new_resource.variables)
+    action    :nothing
   end
 
   r.run_action(:create)
