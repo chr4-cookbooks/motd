@@ -3,6 +3,11 @@ motd CHANGELOG
 
 This file is used to list changes made in each version of the motd cookbook.
 
+0.4.1
+-----
+
+- Convert automatically detected interval to minutes
+
 0.4.0
 -----
 
