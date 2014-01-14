@@ -21,8 +21,8 @@
 actions        :create, :delete
 default_action :create
 
-attribute :name,      :kind_of => String, :name_attribute => true
-attribute :cookbook,  :kind_of => String, :default => 'motd'
-attribute :source,    :kind_of => String, :default => 'cow.erb'
-attribute :variables, :kind_of => Hash, :default => {}
-attribute :color,     :kind_of => [TrueClass, FalseClass], :default => node['motd']['color']
+attribute :name,      kind_of: String, name_attribute: true
+attribute :cookbook,  kind_of: String, default: 'motd'
+attribute :source,    kind_of: String, default: 'cow.erb'
+attribute :variables, kind_of: Hash, default: {}
+attribute :color,     kind_of: [TrueClass, FalseClass], default: node['motd']['color']
