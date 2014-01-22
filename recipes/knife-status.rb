@@ -26,7 +26,7 @@ interval ||= node['chef_client']['interval'] if node.attribute?('chef_client')
 interval ||= 1800
 
 # We need to current interval in minutes
-interval = interval / 60
+interval = Integer(interval) / 60
 
 motd '98-knife-status' do
   source    'knife-status.erb'
