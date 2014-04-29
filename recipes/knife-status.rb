@@ -37,16 +37,16 @@ motd '98-knife-status' do
 end
 
 # add a chef-handler that creates a file with the current timestamp on a successful chef-run
-directory '/var/chef/handlers' do
+directory ::File.join(Chef::Config[:cache_path], 'handlers') do
   mode 00755
 end
 
-template '/var/chef/handlers/knife_status.rb' do
+template ::File.join(Chef::Config[:cache_path], 'handlers', 'knife_status.rb') do
   mode   00644
   source 'knife-status-handler.rb'
 end
 
 chef_handler 'Motd::KnifeStatus' do
-  source '/var/chef/handlers/knife_status.rb'
+  source ::File.join(Chef::Config[:cache_path], 'handlers', 'knife_status.rb')
   action :enable
 end
