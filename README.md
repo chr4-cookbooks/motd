@@ -6,7 +6,7 @@ Installs message of the day (respects update-motd, if installed)
 
 ## default
 
-The default recipe includes the cow and the knife-status recipes
+The default recipe includes the cow and the knife\_status recipes
 
 ## cow
 
@@ -27,9 +27,9 @@ Displays a friendly warning-cow, logging onto a server in the production environ
                   ||     ||
 ```
 
-## knife-status
+## knife\_status
 
-plus a knife-status line that displays the knife status of this node. (only when the node supports update-motd)
+plus a knife\_status line that displays the knife status of this node. (only when the node supports update-motd)
 
 ```
 Last chef run: 10 minutes ago

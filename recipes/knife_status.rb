@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: motd
-# Recipe:: default
+# Recipe:: knife_status
 #
 # Copyright 2012, Chris Aumann
 #
@@ -29,7 +29,7 @@ interval ||= 1800
 interval = Integer(interval) / 60
 
 motd '98-knife-status' do
-  source    'knife-status.erb'
+  source    'knife_status.sh.erb'
   variables interval: interval,
             timestamp_file: "#{Chef::Config[:file_cache_path]}/last_successful_chef_run"
 
@@ -43,7 +43,7 @@ end
 
 template ::File.join(Chef::Config[:file_cache_path], 'handlers', 'knife_status.rb') do
   mode   00644
-  source 'knife-status-handler.rb'
+  source 'knife_status_handler.rb'
 end
 
 chef_handler 'Motd::KnifeStatus' do

@@ -19,4 +19,4 @@
 #
 
 include_recipe 'motd::cow'
-include_recipe 'motd::knife-status'
+include_recipe 'motd::knife_status'
