@@ -3,6 +3,13 @@ motd CHANGELOG
 
 This file is used to list changes made in each version of the motd cookbook.
 
+0.5.0
+-----
+
+- Fix an issue with `knife_status` integer parsing
+- Renamed `knife-status` recipe to `knife_status`
+- Add linting tests
+
 0.4.1
 -----
 
