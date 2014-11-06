@@ -28,9 +28,16 @@ interval ||= 1800
 # We need to current interval in minutes
 interval = Integer(interval) / 60
 
+# As the same with interval, get the current configured interval splay.
+splay = Chef::Config[:splay]
+splay ||= node['chef_client']['splay'] if node.attribute?('chef_client')
+splay ||= 300
+# We need to current splay in minutes
+splay = Integer(splay) / 60
+
 motd '98-knife-status' do
   source    'knife_status.sh.erb'
-  variables interval: interval,
+  variables maxium_delay: interval + splay,
             timestamp_file: "#{Chef::Config[:file_cache_path]}/last_successful_chef_run"
 
   only_if { ::File.directory? '/etc/update-motd.d' }

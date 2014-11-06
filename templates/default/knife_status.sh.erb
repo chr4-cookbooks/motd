@@ -8,7 +8,7 @@ else
 fi
 
 <% if @color %>
-if [ $LAST_RUN -le <%= @interval %> ]; then
+if [ $LAST_RUN -le <%= @maxium_delay %> ]; then
   echo "Last chef run: [0;32;49m$LAST_RUN minute(s)[0m ago"
 else
   echo "Last chef run: [0;31;49m$LAST_RUN minute(s)[0m ago"
