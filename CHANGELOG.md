@@ -3,6 +3,12 @@ motd CHANGELOG
 
 This file is used to list changes made in each version of the motd cookbook.
 
+0.6.0
+-----
+
+- Add tests
+- Add support for spray setting when using knife-status plugin
+
 0.5.0
 -----
 
