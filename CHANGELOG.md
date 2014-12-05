@@ -3,6 +3,11 @@ motd CHANGELOG
 
 This file is used to list changes made in each version of the motd cookbook.
 
+0.6.1
+-----
+
+- Use `node['root_group']` attribute when setting file permissions
+
 0.6.0
 -----
 
