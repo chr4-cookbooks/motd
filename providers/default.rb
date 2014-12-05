@@ -41,7 +41,7 @@ action :create do
 
   r = template target do
     owner     'root'
-    group     'root'
+    group     node['root_group']
     mode      permissions
     cookbook  new_resource.cookbook
     source    new_resource.source
