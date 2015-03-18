@@ -6,3 +6,7 @@ description      'Installs/Configures motd'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.6.1'
 depends          'chef_handler'
+
+%w(ubuntu debian redhat centos scientific amazon fedora).each do |os|
+  supports os
+end
