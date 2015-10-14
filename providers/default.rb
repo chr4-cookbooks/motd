@@ -19,24 +19,29 @@
 #
 
 action :create do
-  # is this machine using update-motd?
-  update_motd = ::File.directory? '/etc/update-motd.d'
+  # can this machine handle dynamic motd?
+  dynamic_motd = (::File.directory? '/etc/update-motd.d') || platform_family?('rhel')
 
   # default variables
   default_variables = {
-    update_motd: update_motd,
+    dynamic_motd: dynamic_motd,
     environment: node.chef_environment,
     domain:      node['domain'],
     hostname:    node['hostname'],
     color:       new_resource.color,
   }
 
-  if update_motd
-    target = "/etc/update-motd.d/#{new_resource.name}"
+  if platform_family?('debian')
+    if dynamic_motd
+      target = "/etc/update-motd.d/#{new_resource.name}"
+      permissions = '0755'
+    else
+      target = '/etc/motd'
+      permissions = '0644'
+    end
+  elsif platform_family?('rhel')
+    target = "/etc/profile.d/#{new_resource.name}.sh"
     permissions = '0755'
-  else
-    target = '/etc/motd'
-    permissions = '0644'
   end
 
   r = template target do
@@ -54,7 +59,13 @@ action :create do
 end
 
 action :delete do
-  r = file "/etc/update-motd.d/#{new_resource.name}" do
+  if platform_family?('debian')
+    target = "/etc/update-motd.d/#{new_resource.name}"
+  elsif platform_family?('rhel')
+    target = "/etc/profile.d/#{new_resource.name}.sh"
+  end
+
+  r = file target do
     action :nothing
   end
 

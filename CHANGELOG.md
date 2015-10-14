@@ -3,6 +3,10 @@ motd CHANGELOG
 
 This file is used to list changes made in each version of the motd cookbook.
 
+0.7.0
+-----
+- Fix to work on CentOS/RHEL
+
 0.6.2
 -----
 
