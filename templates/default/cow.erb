@@ -1,4 +1,4 @@
-<% if @update_motd %>
+<% if @dynamic_motd %>
 #!/bin/sh
 
 cat <<EOS
@@ -26,6 +26,6 @@ cat <<EOS
                   ||----w |
                   ||     ||
 <% end -%>
-<% if @update_motd %>
+<% if @dynamic_motd %>
 EOS
 <% end -%>
