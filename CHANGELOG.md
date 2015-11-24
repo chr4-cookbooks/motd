@@ -3,6 +3,11 @@ motd CHANGELOG
 
 This file is used to list changes made in each version of the motd cookbook.
 
+0.6.3
+-----
+
+- Add `source_url` attributes in `metadata.rb`
+
 0.6.2
 -----
 
