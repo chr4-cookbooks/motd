@@ -10,3 +10,6 @@ depends          'chef_handler'
 %w(ubuntu debian redhat centos scientific amazon fedora).each do |os|
   supports os
 end
+
+source_url 'https://github.com/chr4-cookbooks/motd'
+issues_url 'https://github.com/chr4-cookbooks/motd/issues'
