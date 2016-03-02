@@ -3,6 +3,11 @@ motd CHANGELOG
 
 This file is used to list changes made in each version of the motd cookbook.
 
+0.6.4
+-----
+
+- Fix `source_url` and `issues_url` compatibility for older chef-clients
+
 0.6.3
 -----
 
