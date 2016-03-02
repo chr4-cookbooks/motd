@@ -11,5 +11,5 @@ depends          'chef_handler'
   supports os
 end
 
-source_url 'https://github.com/chr4-cookbooks/motd'
-issues_url 'https://github.com/chr4-cookbooks/motd/issues'
+source_url 'https://github.com/chr4-cookbooks/motd' if respond_to?(:source_url)
+issues_url 'https://github.com/chr4-cookbooks/motd/issues' if respond_to?(:issues_url)
