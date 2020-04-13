@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: motd
+# Cookbook:: motd
 # Recipe:: knife_status
 #
-# Copyright 2012, Chris Aumann
+# Copyright:: 2012, Chris Aumann
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -35,25 +35,21 @@ splay ||= 300
 # We need to current splay in minutes
 splay = Integer(splay) / 60
 
-motd '98-knife-status' do
-  source    'knife_status.sh.erb'
-  variables maxium_delay: interval + splay,
-            timestamp_file: "#{Chef::Config[:file_cache_path]}/last_successful_chef_run"
+timestamp_file = "#{Chef::Config[:file_cache_path]}/last_successful_chef_run"
 
+motd '98-knife-status' do
+  source 'knife_status.sh.erb'
+  variables(
+    maxium_delay: interval + splay,
+    timestamp_file: timestamp_file
+  )
   only_if { ::File.directory? '/etc/update-motd.d' }
 end
 
-# add a chef-handler that creates a file with the current timestamp on a successful chef-run
-directory ::File.join(Chef::Config[:file_cache_path], 'handlers') do
-  mode 00755
-end
-
-template ::File.join(Chef::Config[:file_cache_path], 'handlers', 'knife_status.rb') do
-  mode   00644
-  source 'knife_status_handler.rb'
-end
-
-chef_handler 'Motd::KnifeStatus' do
-  source ::File.join(Chef::Config[:file_cache_path], 'handlers', 'knife_status.rb')
-  action :enable
+Chef.event_handler do
+  on :run_completed do
+    File.open(timestamp_file, 'w') do |file|
+      file.write Time.now.to_i
+    end
+  end
 end

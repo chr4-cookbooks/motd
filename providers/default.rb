@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: motd
+# Cookbook:: motd
 # Provider:: default
 #
-# Copyright 2012, Chris Aumann
+# Copyright:: 2012, Chris Aumann
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,9 +26,9 @@ action :create do
   default_variables = {
     update_motd: update_motd,
     environment: node.chef_environment,
-    domain:      node['domain'],
-    hostname:    node['hostname'],
-    color:       new_resource.color,
+    domain: node['domain'],
+    hostname: node['hostname'],
+    color: new_resource.color,
   }
 
   if update_motd

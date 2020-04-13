@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: motd
+# Cookbook:: motd
 # Library:: matchers
 #
-# Copyright 2014, Chris Aumann
+# Copyright:: 2014, Chris Aumann
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,12 +18,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-if defined?(ChefSpec)
-  def create_motd(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(:motd, :create, resource_name)
-  end
+def create_motd(resource_name)
+  ChefSpec::Matchers::ResourceMatcher.new(:motd, :create, resource_name)
+end
 
-  def delete_motd(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(:motd, :delete, resource_name)
-  end
+def delete_motd(resource_name)
+  ChefSpec::Matchers::ResourceMatcher.new(:motd, :delete, resource_name)
 end

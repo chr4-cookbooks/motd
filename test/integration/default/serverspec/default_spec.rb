@@ -19,21 +19,6 @@ describe 'MOTD' do
       it { should be_grouped_into 'root' }
       its(:content) { should include 'Last chef run:' }
     end
-
-    describe file '/tmp/kitchen/cache/handlers' do
-      it { should be_directory }
-      it { should be_mode '755' }
-      it { should be_owned_by 'root' }
-      it { should be_grouped_into 'root' }
-    end
-
-    describe file '/tmp/kitchen/cache/handlers/knife_status.rb' do
-      it { should be_file }
-      it { should be_mode '644' }
-      it { should be_owned_by 'root' }
-      it { should be_grouped_into 'root' }
-      its(:content) { should include 'KnifeStatus < Chef::Handler' }
-    end
   else
     describe file '/etc/motd' do
       it { should be_file }
