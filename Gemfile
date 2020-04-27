@@ -5,11 +5,11 @@ group :test, :development do
 end
 
 group :test do
-  gem 'berkshelf', '~> 3.1'
-  gem 'chefspec',   '~> 4.0'
-  gem 'foodcritic', '~> 3.0'
-  gem 'rubocop',    '~> 0.24'
+  gem 'berkshelf', '~> 7.0'
+  gem 'chefspec',   '~> 9.1'
+  gem 'rubocop',    '~> 0.82'
+  gem 'foodcritic', '~> 16.0'
 
-  gem 'test-kitchen',    '~> 1.2'
-  gem 'kitchen-vagrant', '~> 0.14'
+  gem 'test-kitchen',    '~> 2.4'
+  gem 'kitchen-vagrant', '~> 1.6'
 end
