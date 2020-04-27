@@ -19,6 +19,8 @@ jobs:
         ruby-version: 2.6.x
     - name: Build and test with Rake
       run: |
+        sudo apt-get install libxml2-dev libxslt-dev
+
         gem install bundler
         bundle install --jobs 4 --retry 3
         bundle exec rake travis
