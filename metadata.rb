@@ -10,6 +10,6 @@ source_url       'https://github.com/chr4-cookbooks/motd'
 issues_url       'https://github.com/chr4-cookbooks/motd/issues'
 license          'GPL-3.0'
 
-%w(ubuntu debian redhat centos scientific amazon fedora).each do |os|
+%w(ubuntu debian).each do |os|
   supports os
 end

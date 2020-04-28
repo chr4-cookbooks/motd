@@ -8,19 +8,20 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby 2.6
       uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.6.x
-    - name: Build and test with Rake
+    - name: Install Chef Dk
       run: |
-        sudo apt-get install libxml2-dev libxslt-dev
-
-        gem install bundler
-        bundle install --jobs 4 --retry 3
-        bundle exec rake travis
+        sudo apt-get install chef-dk
+        wget https://packages.chef.io/files/stable/chefdk/4.7.73/ubuntu/18.04/chefdk_4.7.73-1_amd64.deb
+        sudo dpkg -i chefdk_4.7.73-1_amd64.deb
+        eval "$(chef shell-init bash)"
+    - name: Ubuntu-20
+      kitchen converge ubuntu-20
+    - name: Debian
+      kitchen converge debian
