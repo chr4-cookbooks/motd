@@ -8,7 +8,7 @@ transport:
 
 provisioner:
   name: dokken
-    client_rb:
+  client_rb:
     chef_license: "accept-silent"
   deprecations_as_errors: false
 
@@ -19,7 +19,7 @@ platforms:
       pid_one_command: /usr/lib/systemd/systemd
   - name: debian-9
     driver:
-      image: dokken/debian-9
+      image: dokken/debian-10
       pid_one_command: /bin/systemd
       intermediate_instructions:
         - RUN /usr/bin/apt-get update
