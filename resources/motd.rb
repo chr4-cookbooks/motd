@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: motd
-# Provider:: default
+# Cookbook:: motd
+# Resource:: default
 #
-# Copyright 2012, Chris Aumann
+# Copyright:: 2012, Chris Aumann
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,6 +18,15 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+resource_name :motd
+
+default_action :create
+
+property :cookbook, String, default: 'motd'
+property :source, String, default: 'cow.erb'
+property :variables, Hash, default: {}
+property :color, [true, false], default: node['motd']['color']
+
 action :create do
   # is this machine using update-motd?
   update_motd = ::File.directory? '/etc/update-motd.d'
@@ -26,9 +35,9 @@ action :create do
   default_variables = {
     update_motd: update_motd,
     environment: node.chef_environment,
-    domain:      node['domain'],
-    hostname:    node['hostname'],
-    color:       new_resource.color,
+    domain: node['domain'],
+    hostname: node['hostname'],
+    color: new_resource.color,
   }
 
   if update_motd
@@ -39,25 +48,19 @@ action :create do
     permissions = '0644'
   end
 
-  r = template target do
+  template target do
     owner     'root'
     group     node['root_group']
     mode      permissions
     cookbook  new_resource.cookbook
     source    new_resource.source
     variables default_variables.merge(new_resource.variables)
-    action    :nothing
+    action    :create
   end
-
-  r.run_action(:create)
-  new_resource.updated_by_last_action(true) if r.updated_by_last_action?
 end
 
 action :delete do
-  r = file "/etc/update-motd.d/#{new_resource.name}" do
-    action :nothing
+  file "/etc/update-motd.d/#{new_resource.name}" do
+    action :delete
   end
-
-  r.run_action(:delete)
-  new_resource.updated_by_last_action(true) if r.updated_by_last_action?
 end

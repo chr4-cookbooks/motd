@@ -12,20 +12,7 @@ describe 'motd::knife_status' do
     expect(chef_run).to create_motd('98-knife-status')
   end
 
-  it "creates #{Chef::Config[:file_cache_path]}/handlers directory" do
-    expect(chef_run).to create_directory("#{Chef::Config[:file_cache_path]}/handlers").with(
-      mode: 00755,
-    )
-  end
-
-  it 'adds a Chef handler' do
-    expect(chef_run).to create_template("#{Chef::Config[:file_cache_path]}/handlers/knife_status.rb").with(
-      mode: 00644,
-      source: 'knife_status_handler.rb',
-    )
-  end
-
-  it 'enables Motd::KnifeStatus as a Chef handler' do
-    expect(chef_run).to enable_chef_handler('Motd::KnifeStatus')
+  it 'creates last_successful_chef_run' do
+    expect(chef_run).to create_file("#{Chef::Config[:file_cache_path]}/last_successful_chef_run")
   end
 end
