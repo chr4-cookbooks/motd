@@ -6,7 +6,10 @@ provisioner:
 
 platforms:
   - name: centos-7.6
+  - name: centos-8.2
   - name: debian-10
+  - name: ubuntu-16.04
+  - name: ubuntu-18.04
   - name: ubuntu-20.04
 
 suites:
