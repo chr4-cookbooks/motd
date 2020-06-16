@@ -19,6 +19,7 @@
 #
 
 resource_name :motd
+provides :motd
 
 default_action :create
 
