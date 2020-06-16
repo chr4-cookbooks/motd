@@ -87,3 +87,8 @@ motd '50-mymotd' do
   action :delete
 end
 ```
+
+# Author & Contributors
+
+- Chris Aumann (Author)
+- Simão Martins
