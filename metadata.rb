@@ -1,5 +1,5 @@
 name             'motd'
-version          '1.0.0'
+version          '1.0.1'
 description      'Installs/Configures motd'
 
 chef_version     '>= 14.0'
