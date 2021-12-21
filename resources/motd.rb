@@ -24,7 +24,7 @@ provides :motd
 default_action :create
 
 property :cookbook, String, default: 'motd'
-property :source, String, default: 'cow.erb'
+property :source, String, default: 'assurity.erb'
 property :variables, Hash, default: {}
 property :color, [true, false], default: node['motd']['color']
 

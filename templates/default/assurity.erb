@@ -1,0 +1,10 @@
+<% if @update_motd %>
+#!/bin/sh
+
+cat <<EOS
+<% end -%>
+
+Welcome Assurity DevOps
+<% if @update_motd %>
+EOS
+<% end -%>
